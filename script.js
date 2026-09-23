@@ -924,4 +924,51 @@ const menuData = [
       setTimeout(() => toast.remove(), 300);
     }, 3500);
   }
+
+  // ================= FUNÇÕES DE AUTENTICAÇÃO =================
+
+function switchAuth(view) {
+  const loginCard = document.getElementById('login-card');
+  const registerCard = document.getElementById('register-card');
+  
+  if (view === 'register') {
+    loginCard.classList.add('hidden');
+    registerCard.classList.remove('hidden');
+  } else {
+    registerCard.classList.add('hidden');
+    loginCard.classList.remove('hidden');
+  }
+}
+
+function submitLogin(e) {
+  e.preventDefault();
+  
+  const user = document.getElementById('login-user').value;
+  const pass = document.getElementById('login-pass').value;
+
+  // Verificando usuário e senha especificados
+  if (user === 'viniciuscorreia' && pass === '123456') {
+    // Esconde a tela de autenticação para liberar o app
+    document.getElementById('auth-section').classList.add('hidden');
+    
+    // Opcional: Pré-preencher o formulário de finalização de pedido
+    document.getElementById('cust-name').value = 'Vinícius Correia';
+    
+    // Exibe a notificação de sucesso
+    showToast('Login realizado com sucesso! Bem-vindo.', 'success');
+  } else {
+    showToast('Usuário ou senha incorretos!', 'error');
+  }
+}
+
+function submitRegister(e) {
+  e.preventDefault();
+  
+  // Aqui você futuramente integraria com um Banco de Dados.
+  // Por enquanto, simulamos o sucesso do cadastro.
+  
+  showToast('Cadastro realizado com sucesso! Faça seu login.', 'success');
+  document.getElementById('register-form').reset();
+  switchAuth('login');
+}
   
