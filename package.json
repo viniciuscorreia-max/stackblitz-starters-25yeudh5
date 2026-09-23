@@ -1,8 +1,10 @@
 {
   "scripts": {
+    "test": "vitest run",
     "start": "servor --reload"
   },
   "dependencies": {
-    "servor": "^4.0.2"
+    "servor": "^4.0.2",
+    "vitest": "^5.0.1"
   }
 }
