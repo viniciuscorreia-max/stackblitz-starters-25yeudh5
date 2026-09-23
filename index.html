@@ -1,688 +1,564 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pizzaria - O Vinizin</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Google Fonts Inter -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            colors: {
-              pizza: {
-                50: '#fff1f2',
-                100: '#ffe4e6',
-                500: '#f43f5e',
-                600: '#e11d48',
-                700: '#be123c',
-                900: '#881337',
-              },
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizzaria - O Vinizin</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts Inter -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            pizza: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              900: '#881337',
             },
           },
         },
-      };
-    </script>
-  </head>
-  <body
-    class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col justify-between"
-  >
-    <header
-      class="sticky top-0 z-40 bg-stone-900/95 backdrop-blur-md text-white shadow-lg border-b border-stone-800"
-    >
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"
-      >
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+  <!-- ================= SEÇÃO DE LOGIN E CADASTRO ================= -->
+  <div id="auth-section"
+    class="fixed inset-0 z-[100] bg-stone-900/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+
+    <!-- CARD DE LOGIN -->
+    <div id="login-card"
+      class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+      <div class="text-center mb-8">
         <div
-          class="flex items-center space-x-3 cursor-pointer"
-          onclick="switchTab('menu')"
-        >
-          <div
-            class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 to-pizza-600 flex items-center justify-center shadow-lg"
-          >
-            <i class="fa-solid fa-pizza-slice text-white text-xl"></i>
+          class="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-500 to-pizza-600 mx-auto flex items-center justify-center text-3xl text-white mb-4 shadow-lg">
+          <i class="fa-solid fa-pizza-slice"></i>
+        </div>
+        <h2 class="font-serif text-3xl font-bold text-stone-900">Bem-vindo</h2>
+        <p class="text-stone-500 text-sm mt-1">Faça login para acessar o cardápio</p>
+      </div>
+
+      <form id="login-form" onsubmit="submitLogin(event)" class="space-y-5">
+        <div>
+          <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Usuário</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-stone-400"><i
+                class="fa-solid fa-user"></i></span>
+            <input type="text" id="login-user" value="viniciuscorreia" required
+              class="w-full pl-10 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm transition">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Senha</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-stone-400"><i
+                class="fa-solid fa-lock"></i></span>
+            <input type="password" id="login-pass" value="123456" required
+              class="w-full pl-10 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm transition">
+          </div>
+        </div>
+        <button type="submit"
+          class="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3.5 rounded-xl transition shadow-md mt-2 flex justify-center items-center space-x-2">
+          <span>Entrar</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-stone-500 mt-6 pt-4 border-t border-stone-100">
+        Não tem uma conta? <button onclick="switchAuth('register')"
+          class="text-amber-600 font-bold hover:underline">Cadastre-se</button>
+      </p>
+    </div>
+
+    <!-- CARD DE CADASTRO -->
+    <div id="register-card"
+      class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl hidden animate-in fade-in zoom-in duration-300">
+      <div class="text-center mb-6">
+        <h2 class="font-serif text-2xl font-bold text-stone-900">Criar Conta</h2>
+        <p class="text-stone-500 text-sm mt-1">Preencha seus dados para continuar</p>
+      </div>
+
+      <form id="register-form" onsubmit="submitRegister(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Nome Completo</label>
+          <input type="text" id="reg-name" required placeholder="Ex: João Silva"
+            class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">E-mail</label>
+          <input type="email" id="reg-email" required placeholder="joao@email.com"
+            class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Senha</label>
+            <input type="password" id="reg-pass" required placeholder="******"
+              class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
           </div>
           <div>
-            <h1
-              class="font-serif text-2xl font-bold tracking-wider text-amber-100"
-            >
-              Bella Italia
-            </h1>
-            <p class="text-xs text-stone-400 tracking-widest uppercase">
-              Pizzaria Artesanal
-            </p>
+            <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Telefone</label>
+            <input type="tel" id="reg-phone" required placeholder="(11) 99999-9999"
+              class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
           </div>
         </div>
 
-        <!-- Navigation Links -->
-        <nav class="hidden md:flex items-center space-x-8 font-medium">
-          <button
-            onclick="switchTab('menu')"
-            id="nav-menu"
-            class="text-amber-400 border-b-2 border-amber-400 pb-1 transition"
-          >
-            Cardápio
-          </button>
-          <button
-            onclick="switchTab('orders')"
-            id="nav-orders"
-            class="text-stone-300 hover:text-amber-400 transition relative"
-          >
-            Meus Pedidos
-            <span
-              id="active-orders-badge"
-              class="hidden absolute -top-2 -right-4 bg-pizza-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold"
-              >0</span
-            >
-          </button>
-        </nav>
+        <div class="pt-2 border-t border-stone-100">
+          <h4 class="text-xs font-bold text-stone-900 mb-3 flex items-center"><i
+              class="fa-solid fa-location-dot text-amber-500 mr-2"></i> Endereço</h4>
+          <div class="grid grid-cols-3 gap-3 mb-3">
+            <div class="col-span-1">
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">CEP</label>
+              <input type="text" id="reg-cep" required placeholder="00000-000"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+            </div>
+            <div class="col-span-2">
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Rua</label>
+              <input type="text" id="reg-street" required placeholder="Nome da rua"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Número / Complemento</label>
+            <input type="text" id="reg-num" required placeholder="Ex: 42, Apto 10"
+              class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+          </div>
+        </div>
 
-        <!-- Actions: Cart & Mobile Menu Button -->
-        <div class="flex items-center space-x-4">
-          <button
-            onclick="openCartDrawer()"
-            class="relative bg-stone-800 hover:bg-stone-700 text-amber-400 px-4 py-2.5 rounded-xl flex items-center space-x-2 border border-stone-700 transition shadow-md"
-          >
-            <i class="fa-solid fa-bag-shopping text-lg"></i>
-            <span class="hidden sm:inline font-semibold">Sacola</span>
-            <span
-              id="cart-badge"
-              class="bg-pizza-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
-              >0</span
-            >
-          </button>
-          <button
-            onclick="toggleMobileMenu()"
-            class="md:hidden text-stone-300 hover:text-white p-2 text-xl"
-          >
-            <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
-          </button>
+        <button type="submit"
+          class="w-full bg-stone-900 hover:bg-stone-800 text-white font-bold py-3.5 rounded-xl transition shadow-md mt-4">
+          Cadastrar Conta
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-stone-500 mt-6 pt-4 border-t border-stone-100">
+        Já possui conta? <button onclick="switchAuth('login')" class="text-amber-600 font-bold hover:underline">Fazer
+          Login</button>
+      </p>
+    </div>
+  </div>
+  <!-- ============================================================= -->
+  <header class="sticky top-0 z-40 bg-stone-900/95 backdrop-blur-md text-white shadow-lg border-b border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('menu')">
+        <div
+          class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 to-pizza-600 flex items-center justify-center shadow-lg">
+          <i class="fa-solid fa-pizza-slice text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-serif text-2xl font-bold tracking-wider text-amber-100">
+            Bella Italia
+          </h1>
+          <p class="text-xs text-stone-400 tracking-widest uppercase">
+            Pizzaria Artesanal
+          </p>
         </div>
       </div>
 
-      <!-- Mobile Menu Dropdown -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-stone-900 border-t border-stone-800 px-4 pt-2 pb-4 space-y-2"
-      >
-        <button
-          onclick="switchTab('menu'); toggleMobileMenu();"
-          class="block w-full text-left py-2 px-3 rounded-lg text-amber-400 bg-stone-800 font-medium"
-        >
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <button onclick="switchTab('menu')" id="nav-menu"
+          class="text-amber-400 border-b-2 border-amber-400 pb-1 transition">
           Cardápio
         </button>
-        <button
-          onclick="switchTab('orders'); toggleMobileMenu();"
-          class="block w-full text-left py-2 px-3 rounded-lg text-stone-300 hover:bg-stone-800 font-medium"
-        >
+        <button onclick="switchTab('orders')" id="nav-orders"
+          class="text-stone-300 hover:text-amber-400 transition relative">
           Meus Pedidos
+          <span id="active-orders-badge"
+            class="hidden absolute -top-2 -right-4 bg-pizza-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">0</span>
+        </button>
+      </nav>
+
+      <!-- Actions: Cart & Mobile Menu Button -->
+      <div class="flex items-center space-x-4">
+        <button onclick="openCartDrawer()"
+          class="relative bg-stone-800 hover:bg-stone-700 text-amber-400 px-4 py-2.5 rounded-xl flex items-center space-x-2 border border-stone-700 transition shadow-md">
+          <i class="fa-solid fa-bag-shopping text-lg"></i>
+          <span class="hidden sm:inline font-semibold">Sacola</span>
+          <span id="cart-badge"
+            class="bg-pizza-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+        <button onclick="toggleMobileMenu()" class="md:hidden text-stone-300 hover:text-white p-2 text-xl">
+          <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
         </button>
       </div>
-    </header>
+    </div>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Notification Toast -->
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-t border-stone-800 px-4 pt-2 pb-4 space-y-2">
+      <button onclick="switchTab('menu'); toggleMobileMenu();"
+        class="block w-full text-left py-2 px-3 rounded-lg text-amber-400 bg-stone-800 font-medium">
+        Cardápio
+      </button>
+      <button onclick="switchTab('orders'); toggleMobileMenu();"
+        class="block w-full text-left py-2 px-3 rounded-lg text-stone-300 hover:bg-stone-800 font-medium">
+        Meus Pedidos
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Notification Toast -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- TAB 1: MENU CATALOG -->
+    <section id="tab-menu" class="space-y-8">
+      <!-- Hero Banner -->
       <div
-        id="toast-container"
-        class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"
-      ></div>
-
-      <!-- TAB 1: MENU CATALOG -->
-      <section id="tab-menu" class="space-y-8">
-        <!-- Hero Banner -->
+        class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-stone-900 via-stone-800 to-amber-950 text-white p-8 sm:p-12 shadow-2xl flex flex-col justify-center min-h-[300px]">
         <div
-          class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-stone-900 via-stone-800 to-amber-950 text-white p-8 sm:p-12 shadow-2xl flex flex-col justify-center min-h-[300px]"
-        >
-          <div
-            class="absolute inset-0 opacity-20 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"
-          ></div>
-          <div class="relative z-10 max-w-xl space-y-4">
-            <span
-              class="bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full"
-              >Tradição Italiana na sua porta</span
-            >
-            <h2
-              class="font-serif text-4xl sm:text-5xl font-extrabold tracking-tight"
-            >
-              A Verdadeira Pizza Napolitana
-            </h2>
-            <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
-              Massa fermentada por 48 horas, ingredientes frescos importados e
-              assada em forno a lenha.
-            </p>
-            <div class="pt-2 flex flex-wrap gap-4">
-              <a
-                href="#menu-catalog"
-                class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-6 py-3 rounded-xl transition shadow-lg flex items-center space-x-2"
-              >
-                <span>Ver Cardápio</span>
-                <i class="fa-solid fa-arrow-down"></i>
-              </a>
-            </div>
+          class="absolute inset-0 opacity-20 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]">
+        </div>
+        <div class="relative z-10 max-w-xl space-y-4">
+          <span
+            class="bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full">Tradição
+            Italiana na sua porta</span>
+          <h2 class="font-serif text-4xl sm:text-5xl font-extrabold tracking-tight">
+            A Verdadeira Pizza Napolitana
+          </h2>
+          <p class="text-stone-300 text-sm sm:text-base leading-relaxed">
+            Massa fermentada por 48 horas, ingredientes frescos importados e
+            assada em forno a lenha.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-4">
+            <a href="#menu-catalog"
+              class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-6 py-3 rounded-xl transition shadow-lg flex items-center space-x-2">
+              <span>Ver Cardápio</span>
+              <i class="fa-solid fa-arrow-down"></i>
+            </a>
           </div>
         </div>
+      </div>
 
-        <!-- Filter Categories & Search Bar -->
-        <div id="menu-catalog" class="space-y-6 pt-4">
-          <div
-            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
-          >
-            <!-- Category Pills -->
-            <div
-              class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none"
-            >
-              <button
-                onclick="filterCategory('all')"
-                id="cat-all"
-                class="category-btn active px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-amber-500 text-stone-950 shadow-md whitespace-nowrap"
-              >
-                Todas
-              </button>
-              <button
-                onclick="filterCategory('pizzas')"
-                id="cat-pizzas"
-                class="category-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-stone-600 hover:bg-stone-100 border border-stone-200 whitespace-nowrap"
-              >
-                Pizzas
-              </button>
-              <button
-                onclick="filterCategory('drinks')"
-                id="cat-drinks"
-                class="category-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-stone-600 hover:bg-stone-100 border border-stone-200 whitespace-nowrap"
-              >
-                Bebidas
-              </button>
-              <button
-                onclick="filterCategory('desserts')"
-                id="cat-desserts"
-                class="category-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-stone-600 hover:bg-stone-100 border border-stone-200 whitespace-nowrap"
-              >
-                Sobremesas
-              </button>
-            </div>
-
-            <!-- Search Input -->
-            <div class="relative w-full md:w-72">
-              <span
-                class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-stone-400"
-              >
-                <i class="fa-solid fa-search"></i>
-              </span>
-              <input
-                type="text"
-                id="search-input"
-                oninput="handleSearch()"
-                placeholder="Buscar item..."
-                class="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm shadow-sm"
-              />
-            </div>
-          </div>
-
-          <!-- Menu Items Grid -->
-          <div
-            id="menu-grid"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            <!-- Dynamic Items will load here -->
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 2: ACTIVE ORDERS TRACKING BOARD -->
-      <section id="tab-orders" class="hidden space-y-8">
-        <div
-          class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-stone-200 space-y-6"
-        >
-          <div
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-100 pb-6"
-          >
-            <div>
-              <h2 class="font-serif text-2xl font-bold text-stone-900">
-                Acompanhe seus Pedidos
-              </h2>
-              <p class="text-sm text-stone-500">
-                Veja o status em tempo real da sua entrega
-              </p>
-            </div>
-            <button
-              onclick="renderOrdersBoard()"
-              class="self-start bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-sm font-medium transition flex items-center space-x-2"
-            >
-              <i class="fa-solid fa-rotate-right"></i>
-              <span>Atualizar Status</span>
+      <!-- Filter Categories & Search Bar -->
+      <div id="menu-catalog" class="space-y-6 pt-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <!-- Category Pills -->
+          <div class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none">
+            <button onclick="filterCategory('all')" id="cat-all"
+              class="category-btn active px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-amber-500 text-stone-950 shadow-md whitespace-nowrap">
+              Todas
+            </button>
+            <button onclick="filterCategory('pizzas')" id="cat-pizzas"
+              class="category-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-stone-600 hover:bg-stone-100 border border-stone-200 whitespace-nowrap">
+              Pizzas
+            </button>
+            <button onclick="filterCategory('drinks')" id="cat-drinks"
+              class="category-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-stone-600 hover:bg-stone-100 border border-stone-200 whitespace-nowrap">
+              Bebidas
+            </button>
+            <button onclick="filterCategory('desserts')" id="cat-desserts"
+              class="category-btn px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-stone-600 hover:bg-stone-100 border border-stone-200 whitespace-nowrap">
+              Sobremesas
             </button>
           </div>
 
-          <!-- Orders Container -->
-          <div id="orders-container" class="space-y-6">
-            <!-- Dynamic Orders -->
+          <!-- Search Input -->
+          <div class="relative w-full md:w-72">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-stone-400">
+              <i class="fa-solid fa-search"></i>
+            </span>
+            <input type="text" id="search-input" oninput="handleSearch()" placeholder="Buscar item..."
+              class="w-full pl-10 pr-4 py-2.5 bg-white border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm shadow-sm" />
           </div>
         </div>
-      </section>
-    </main>
 
-    <div
-      id="cart-overlay"
-      onclick="closeCartDrawer()"
-      class="fixed inset-0 bg-stone-950/60 backdrop-blur-sm z-50 hidden transition-opacity opacity-0"
-    ></div>
-    <div
-      id="cart-drawer"
-      class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-50 flex flex-col transform translate-x-full transition-transform duration-300"
-    >
-      <!-- Cart Header -->
-      <div
-        class="p-6 bg-stone-900 text-white flex items-center justify-between border-b border-stone-800"
-      >
-        <div class="flex items-center space-x-3">
-          <i class="fa-solid fa-bag-shopping text-amber-400 text-xl"></i>
-          <h3 class="font-serif font-bold text-lg">Sua Sacola</h3>
+        <!-- Menu Items Grid -->
+        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamic Items will load here -->
         </div>
-        <button
-          onclick="closeCartDrawer()"
-          class="text-stone-400 hover:text-white p-2 rounded-lg transition"
-        >
+      </div>
+    </section>
+
+    <!-- TAB 2: ACTIVE ORDERS TRACKING BOARD -->
+    <section id="tab-orders" class="hidden space-y-8">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-stone-200 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-100 pb-6">
+          <div>
+            <h2 class="font-serif text-2xl font-bold text-stone-900">
+              Acompanhe seus Pedidos
+            </h2>
+            <p class="text-sm text-stone-500">
+              Veja o status em tempo real da sua entrega
+            </p>
+          </div>
+          <button onclick="renderOrdersBoard()"
+            class="self-start bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-sm font-medium transition flex items-center space-x-2">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Atualizar Status</span>
+          </button>
+        </div>
+
+        <!-- Orders Container -->
+        <div id="orders-container" class="space-y-6">
+          <!-- Dynamic Orders -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="cart-overlay" onclick="closeCartDrawer()"
+    class="fixed inset-0 bg-stone-950/60 backdrop-blur-sm z-50 hidden transition-opacity opacity-0"></div>
+  <div id="cart-drawer"
+    class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-50 flex flex-col transform translate-x-full transition-transform duration-300">
+    <!-- Cart Header -->
+    <div class="p-6 bg-stone-900 text-white flex items-center justify-between border-b border-stone-800">
+      <div class="flex items-center space-x-3">
+        <i class="fa-solid fa-bag-shopping text-amber-400 text-xl"></i>
+        <h3 class="font-serif font-bold text-lg">Sua Sacola</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="text-stone-400 hover:text-white p-2 rounded-lg transition">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+    </div>
+
+    <!-- Cart Items List -->
+    <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4 divide-y divide-stone-100">
+      <!-- Dynamic Cart Items -->
+    </div>
+
+    <!-- Cart Footer -->
+    <div id="cart-footer" class="p-6 bg-stone-50 border-t border-stone-200 space-y-4">
+      <div class="space-y-2">
+        <div class="flex justify-between text-sm text-stone-600">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">R$ 0,00</span>
+        </div>
+        <div class="flex justify-between text-sm text-stone-600">
+          <span>Taxa de Entrega</span>
+          <span id="cart-delivery">R$ 8,00</span>
+        </div>
+        <div class="flex justify-between text-base font-bold text-stone-900 pt-2 border-t border-stone-200">
+          <span>Total</span>
+          <span id="cart-total" class="text-amber-600">R$ 0,00</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <button onclick="clearCartConfirm()"
+          class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold py-3 rounded-xl transition text-sm">
+          Esvaziar
+        </button>
+        <button onclick="openCheckoutModal()" id="checkout-btn"
+          class="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3 rounded-xl transition text-sm shadow-md flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span>Finalizar</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="customization-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm hidden">
+    <div
+      class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl transform transition-all animate-in fade-in zoom-in duration-200 max-h-[90vh] flex flex-col">
+      <div class="relative h-48 bg-stone-900 flex items-center justify-center overflow-hidden">
+        <img id="modal-item-img" src="" alt="Item" class="w-full h-full object-cover opacity-80" />
+        <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent"></div>
+        <button onclick="closeCustomizationModal()"
+          class="absolute top-4 right-4 bg-stone-900/80 hover:bg-stone-900 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="absolute bottom-4 left-6 right-6">
+          <h3 id="modal-item-name" class="font-serif text-2xl font-bold text-white">
+            Nome da Pizza
+          </h3>
+          <p id="modal-item-price" class="text-amber-400 font-bold text-lg">
+            R$ 0,00
+          </p>
+        </div>
+      </div>
+
+      <div id="modal-options-body" class="p-6 overflow-y-auto space-y-6 flex-grow">
+        <!-- Dynamic options (Sizes, Crusts, Extras) -->
+      </div>
+
+      <div class="p-6 bg-stone-50 border-t border-stone-200 flex items-center justify-between">
+        <div class="flex items-center space-x-3 bg-white border border-stone-200 rounded-xl px-3 py-1.5 shadow-sm">
+          <button onclick="adjustModalQty(-1)"
+            class="text-stone-500 hover:text-stone-900 w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span id="modal-item-qty" class="font-bold text-stone-900 w-6 text-center">1</span>
+          <button onclick="adjustModalQty(1)"
+            class="text-stone-500 hover:text-stone-900 w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        <button onclick="confirmAddToCart()"
+          class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-3 rounded-xl transition shadow-md flex items-center space-x-2">
+          <i class="fa-solid fa-cart-plus"></i>
+          <span id="modal-add-btn-text">Adicionar • R$ 0,00</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkout-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="p-6 bg-stone-900 text-white flex items-center justify-between">
+        <h3 class="font-serif text-xl font-bold">Finalizar Pedido</h3>
+        <button onclick="closeCheckoutModal()" class="text-stone-400 hover:text-white">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
 
-      <!-- Cart Items List -->
-      <div
-        id="cart-items-container"
-        class="flex-grow overflow-y-auto p-6 space-y-4 divide-y divide-stone-100"
-      >
-        <!-- Dynamic Cart Items -->
-      </div>
-
-      <!-- Cart Footer -->
-      <div
-        id="cart-footer"
-        class="p-6 bg-stone-50 border-t border-stone-200 space-y-4"
-      >
-        <div class="space-y-2">
-          <div class="flex justify-between text-sm text-stone-600">
-            <span>Subtotal</span>
-            <span id="cart-subtotal">R$ 0,00</span>
-          </div>
-          <div class="flex justify-between text-sm text-stone-600">
-            <span>Taxa de Entrega</span>
-            <span id="cart-delivery">R$ 8,00</span>
-          </div>
-          <div
-            class="flex justify-between text-base font-bold text-stone-900 pt-2 border-t border-stone-200"
-          >
-            <span>Total</span>
-            <span id="cart-total" class="text-amber-600">R$ 0,00</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <button
-            onclick="clearCartConfirm()"
-            class="w-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold py-3 rounded-xl transition text-sm"
-          >
-            Esvaziar
-          </button>
-          <button
-            onclick="openCheckoutModal()"
-            id="checkout-btn"
-            class="w-full bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold py-3 rounded-xl transition text-sm shadow-md flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span>Finalizar</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="customization-modal"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm hidden"
-    >
-      <div
-        class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl transform transition-all animate-in fade-in zoom-in duration-200 max-h-[90vh] flex flex-col"
-      >
-        <div
-          class="relative h-48 bg-stone-900 flex items-center justify-center overflow-hidden"
-        >
-          <img
-            id="modal-item-img"
-            src=""
-            alt="Item"
-            class="w-full h-full object-cover opacity-80"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent"
-          ></div>
-          <button
-            onclick="closeCustomizationModal()"
-            class="absolute top-4 right-4 bg-stone-900/80 hover:bg-stone-900 text-white w-10 h-10 rounded-full flex items-center justify-center transition"
-          >
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <div class="absolute bottom-4 left-6 right-6">
-            <h3
-              id="modal-item-name"
-              class="font-serif text-2xl font-bold text-white"
-            >
-              Nome da Pizza
-            </h3>
-            <p id="modal-item-price" class="text-amber-400 font-bold text-lg">
-              R$ 0,00
-            </p>
-          </div>
-        </div>
-
-        <div
-          id="modal-options-body"
-          class="p-6 overflow-y-auto space-y-6 flex-grow"
-        >
-          <!-- Dynamic options (Sizes, Crusts, Extras) -->
-        </div>
-
-        <div
-          class="p-6 bg-stone-50 border-t border-stone-200 flex items-center justify-between"
-        >
-          <div
-            class="flex items-center space-x-3 bg-white border border-stone-200 rounded-xl px-3 py-1.5 shadow-sm"
-          >
-            <button
-              onclick="adjustModalQty(-1)"
-              class="text-stone-500 hover:text-stone-900 w-8 h-8 flex items-center justify-center"
-            >
-              <i class="fa-solid fa-minus"></i>
-            </button>
-            <span
-              id="modal-item-qty"
-              class="font-bold text-stone-900 w-6 text-center"
-              >1</span
-            >
-            <button
-              onclick="adjustModalQty(1)"
-              class="text-stone-500 hover:text-stone-900 w-8 h-8 flex items-center justify-center"
-            >
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-          <button
-            onclick="confirmAddToCart()"
-            class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-3 rounded-xl transition shadow-md flex items-center space-x-2"
-          >
-            <i class="fa-solid fa-cart-plus"></i>
-            <span id="modal-add-btn-text">Adicionar • R$ 0,00</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="checkout-modal"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-sm hidden"
-    >
-      <div
-        class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
-      >
-        <div
-          class="p-6 bg-stone-900 text-white flex items-center justify-between"
-        >
-          <h3 class="font-serif text-xl font-bold">Finalizar Pedido</h3>
-          <button
-            onclick="closeCheckoutModal()"
-            class="text-stone-400 hover:text-white"
-          >
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
-        </div>
-
-        <form
-          id="checkout-form"
-          onsubmit="submitCheckout(event)"
-          class="p-6 overflow-y-auto space-y-6 flex-grow"
-        >
-          <div class="space-y-4">
-            <h4
-              class="font-semibold text-stone-900 flex items-center space-x-2"
-            >
-              <i class="fa-solid fa-user text-amber-500"></i>
-              <span>Informações de Contato</span>
-            </h4>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label
-                  class="block text-xs font-semibold text-stone-600 uppercase mb-1"
-                  >Nome Completo</label
-                >
-                <input
-                  type="text"
-                  id="cust-name"
-                  required
-                  placeholder="Ex: João da Silva"
-                  class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-xs font-semibold text-stone-600 uppercase mb-1"
-                  >Telefone / WhatsApp</label
-                >
-                <input
-                  type="tel"
-                  id="cust-phone"
-                  required
-                  placeholder="(11) 99999-9999"
-                  class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <h4
-              class="font-semibold text-stone-900 flex items-center space-x-2"
-            >
-              <i class="fa-solid fa-location-dot text-amber-500"></i>
-              <span>Endereço de Entrega</span>
-            </h4>
-            <div class="grid grid-cols-3 gap-4">
-              <div class="col-span-2">
-                <label
-                  class="block text-xs font-semibold text-stone-600 uppercase mb-1"
-                  >Rua / Avenida</label
-                >
-                <input
-                  type="text"
-                  id="cust-street"
-                  required
-                  placeholder="Ex: Av. Paulista"
-                  class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-xs font-semibold text-stone-600 uppercase mb-1"
-                  >Número</label
-                >
-                <input
-                  type="text"
-                  id="cust-number"
-                  required
-                  placeholder="1000"
-                  class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm"
-                />
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label
-                  class="block text-xs font-semibold text-stone-600 uppercase mb-1"
-                  >Bairro</label
-                >
-                <input
-                  type="text"
-                  id="cust-neighborhood"
-                  required
-                  placeholder="Ex: Bela Vista"
-                  class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-xs font-semibold text-stone-600 uppercase mb-1"
-                  >Complemento (Opcional)</label
-                >
-                <input
-                  type="text"
-                  id="cust-complement"
-                  placeholder="Apto 42"
-                  class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <h4
-              class="font-semibold text-stone-900 flex items-center space-x-2"
-            >
-              <i class="fa-solid fa-wallet text-amber-500"></i>
-              <span>Forma de Pagamento</span>
-            </h4>
-            <div class="grid grid-cols-3 gap-3">
-              <label
-                class="border border-stone-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-900"
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  value="Pix"
-                  checked
-                  class="hidden"
-                />
-                <i class="fa-solid fa-qrcode text-xl mb-1 text-amber-600"></i>
-                <span class="text-xs font-semibold">Pix</span>
-              </label>
-              <label
-                class="border border-stone-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-900"
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  value="Cartão de Crédito"
-                  class="hidden"
-                />
-                <i
-                  class="fa-solid fa-credit-card text-xl mb-1 text-amber-600"
-                ></i>
-                <span class="text-xs font-semibold">Cartão</span>
-              </label>
-              <label
-                class="border border-stone-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-900"
-              >
-                <input
-                  type="radio"
-                  name="payment"
-                  value="Dinheiro"
-                  class="hidden"
-                />
-                <i
-                  class="fa-solid fa-money-bill-wave text-xl mb-1 text-amber-600"
-                ></i>
-                <span class="text-xs font-semibold">Dinheiro</span>
-              </label>
-            </div>
-          </div>
-
-          <div
-            class="pt-4 border-t border-stone-100 flex items-center justify-between"
-          >
-            <div>
-              <span class="text-xs text-stone-500 block">Total a pagar</span>
-              <span
-                id="checkout-total-val"
-                class="font-bold text-xl text-stone-900"
-                >R$ 0,00</span
-              >
-            </div>
-            <button
-              type="submit"
-              class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-3.5 rounded-xl transition shadow-md"
-            >
-              Confirmar Pedido
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <footer
-      class="bg-stone-900 text-stone-400 border-t border-stone-800 py-12 mt-16"
-    >
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8"
-      >
+      <form id="checkout-form" onsubmit="submitCheckout(event)" class="p-6 overflow-y-auto space-y-6 flex-grow">
         <div class="space-y-4">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-stone-950 font-bold"
-            >
-              <i class="fa-solid fa-pizza-slice"></i>
-            </div>
-            <h3 class="font-serif text-xl font-bold text-white">
-              Bella Italia
-            </h3>
-          </div>
-          <p class="text-sm">
-            Levando a verdadeira experiência napolitana diretamente para o
-            conforto da sua casa com ingredientes selecionados.
-          </p>
-        </div>
-        <div>
-          <h4 class="text-white font-semibold mb-3">
-            Horário de Funcionamento
+          <h4 class="font-semibold text-stone-900 flex items-center space-x-2">
+            <i class="fa-solid fa-user text-amber-500"></i>
+            <span>Informações de Contato</span>
           </h4>
-          <ul class="text-sm space-y-2">
-            <li>Terça a Quinta: 18h às 23h</li>
-            <li>Sexta a Domingo: 18h às 00h</li>
-            <li>Segunda-feira: Fechado</li>
-          </ul>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Nome Completo</label>
+              <input type="text" id="cust-name" required placeholder="Ex: João da Silva"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Telefone / WhatsApp</label>
+              <input type="tel" id="cust-phone" required placeholder="(11) 99999-9999"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm" />
+            </div>
+          </div>
         </div>
-        <div>
-          <h4 class="text-white font-semibold mb-3">Contato & Endereço</h4>
-          <ul class="text-sm space-y-2">
-            <li>
-              <i class="fa-solid fa-phone mr-2 text-amber-500"></i> (11)
-              3456-7890
-            </li>
-            <li>
-              <i class="fa-solid fa-location-dot mr-2 text-amber-500"></i> Rua
-              das Pizzas, 420 - São Paulo, SP
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-8 border-t border-stone-800 text-center text-xs text-stone-500"
-      >
-        &copy; 2026 Pizzaria Bella Italia. Todos os direitos reservados.
-      </div>
-    </footer>
 
-    <script src="script.js"></script>
-  </body>
+        <div class="space-y-4">
+          <h4 class="font-semibold text-stone-900 flex items-center space-x-2">
+            <i class="fa-solid fa-location-dot text-amber-500"></i>
+            <span>Endereço de Entrega</span>
+          </h4>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="col-span-2">
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Rua / Avenida</label>
+              <input type="text" id="cust-street" required placeholder="Ex: Av. Paulista"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Número</label>
+              <input type="text" id="cust-number" required placeholder="1000"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Bairro</label>
+              <input type="text" id="cust-neighborhood" required placeholder="Ex: Bela Vista"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-stone-600 uppercase mb-1">Complemento (Opcional)</label>
+              <input type="text" id="cust-complement" placeholder="Apto 42"
+                class="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-500 text-sm" />
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h4 class="font-semibold text-stone-900 flex items-center space-x-2">
+            <i class="fa-solid fa-wallet text-amber-500"></i>
+            <span>Forma de Pagamento</span>
+          </h4>
+          <div class="grid grid-cols-3 gap-3">
+            <label
+              class="border border-stone-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-900">
+              <input type="radio" name="payment" value="Pix" checked class="hidden" />
+              <i class="fa-solid fa-qrcode text-xl mb-1 text-amber-600"></i>
+              <span class="text-xs font-semibold">Pix</span>
+            </label>
+            <label
+              class="border border-stone-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-900">
+              <input type="radio" name="payment" value="Cartão de Crédito" class="hidden" />
+              <i class="fa-solid fa-credit-card text-xl mb-1 text-amber-600"></i>
+              <span class="text-xs font-semibold">Cartão</span>
+            </label>
+            <label
+              class="border border-stone-200 rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition has-[:checked]:bg-amber-50 has-[:checked]:border-amber-500 has-[:checked]:text-amber-900">
+              <input type="radio" name="payment" value="Dinheiro" class="hidden" />
+              <i class="fa-solid fa-money-bill-wave text-xl mb-1 text-amber-600"></i>
+              <span class="text-xs font-semibold">Dinheiro</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-stone-500 block">Total a pagar</span>
+            <span id="checkout-total-val" class="font-bold text-xl text-stone-900">R$ 0,00</span>
+          </div>
+          <button type="submit"
+            class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-8 py-3.5 rounded-xl transition shadow-md">
+            Confirmar Pedido
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bg-stone-900 text-stone-400 border-t border-stone-800 py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="space-y-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-stone-950 font-bold">
+            <i class="fa-solid fa-pizza-slice"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-white">
+            Bella Italia
+          </h3>
+        </div>
+        <p class="text-sm">
+          Levando a verdadeira experiência napolitana diretamente para o
+          conforto da sua casa com ingredientes selecionados.
+        </p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">
+          Horário de Funcionamento
+        </h4>
+        <ul class="text-sm space-y-2">
+          <li>Terça a Quinta: 18h às 23h</li>
+          <li>Sexta a Domingo: 18h às 00h</li>
+          <li>Segunda-feira: Fechado</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">Contato & Endereço</h4>
+        <ul class="text-sm space-y-2">
+          <li>
+            <i class="fa-solid fa-phone mr-2 text-amber-500"></i> (11)
+            3456-7890
+          </li>
+          <li>
+            <i class="fa-solid fa-location-dot mr-2 text-amber-500"></i> Rua
+            das Pizzas, 420 - São Paulo, SP
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-8 border-t border-stone-800 text-center text-xs text-stone-500">
+      &copy; 2026 Pizzaria Bella Italia. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
